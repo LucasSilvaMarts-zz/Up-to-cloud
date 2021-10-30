@@ -9,7 +9,7 @@ const port = 3001;
 */
 mongoose.connect('mongodb://localhost:27017/upload', {
   useNewUrlParser: true,
-})
+});
 
 app.use(require('./routes'));
 app.use(express.urlencoded({ extended: true })); // Facilita envio de arquivos
