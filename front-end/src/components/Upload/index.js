@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Dropzone from 'react-dropzone';
 
 import { DropContainer, UploadMessage } from './styles';
 
-const Upload = () => {
-
-  const renderDragMessage = (isDragActive, isDragReject) => {
+export default class Upload extends Component {
+  renderDragMessage = (isDragActive, isDragReject) => {
     if (!isDragActive) {
       return <UploadMessage>Arraste arquivos aqui...</UploadMessage>
     }
@@ -18,20 +17,22 @@ const Upload = () => {
     return <UploadMessage type="success">Solte os arquivos aqui</UploadMessage>
   };
 
-  return (
-    <Dropzone accept="image/*" onDropAccepted={() => {}}>
-      { ({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-        <DropContainer
-          {...getRootProps()}
-          isDragActive={isDragActive}
-          isDragReject={isDragReject}
-        >
-          <input {...getInputProps()} />
-          { renderDragMessage(isDragActive, isDragReject) }
-        </DropContainer>
-      ) }
-    </Dropzone>
-  );
-}
+  render() {
+    const { onUpload } = this.props;
 
-export default Upload;
+    return (
+      <Dropzone accept="image/*" onDropAccepted={onUpload}>
+        { ({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
+          <DropContainer
+            {...getRootProps()}
+            isDragActive={isDragActive}
+            isDragReject={isDragReject}
+          >
+            <input {...getInputProps()} />
+            { this.renderDragMessage(isDragActive, isDragReject) }
+          </DropContainer>
+        ) }
+      </Dropzone>
+    );
+  }
+}
