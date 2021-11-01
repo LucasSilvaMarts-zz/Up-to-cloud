@@ -11,7 +11,9 @@ class App extends Component {
   };
 
   handleUpload = files => {
-    console.log(files);
+    const uploadedFiles = files.map(file => ({
+      file,
+    }))
   };
 
   render() {
