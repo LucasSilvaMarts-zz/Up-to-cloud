@@ -29,8 +29,12 @@ class App extends Component {
       uploadedFiles: this.state.uploadedFiles.concat(uploadedFiles)
     });
 
-
+    uploadedFiles.forEach(this.processUpload);
   };
+
+  processUpload = (uploadedFile) => {
+
+  }
 
   render() {
     const { uploadedFiles } = this.state;
